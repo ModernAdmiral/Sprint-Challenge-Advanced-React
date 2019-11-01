@@ -1,26 +1,36 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import "./App.css";
+import PlayerCard from "./Components/PlayerCard";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export default class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      playersData: []
+    };
+  }
+
+  componentDidMount() {
+    console.log("CDM is running");
+
+    fetch(`http://localhost:5000/api/players`)
+      .then(res => res.json())
+      .then(response => {
+        console.log("response", response);
+        this.setState({ playersData: response });
+      })
+      .catch(error => {
+        console.log("The data was not returned", error);
+      });
+  }
+
+  render() {
+    return (
+      <div className="cardWrapper">
+        {this.state.playersData.map(e => {
+          return <PlayerCard key={e.id} name={e.name} country={e.country} />;
+        })}
+      </div>
+    );
+  }
 }
-
-export default App;

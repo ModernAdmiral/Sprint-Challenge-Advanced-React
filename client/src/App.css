@@ -23,6 +23,29 @@
   color: #61dafb;
 }
 
+.card {
+  border: 2px solid;
+  width: 45%;
+  margin: 1%;
+  padding: 1%;
+}
+
+.cardWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+
+.dark-mode {
+  color: #fff;
+  background-color: #313843;
+}
+
+.dark-mode .navbar {
+  background-color: #1f2022;
+  border: none;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
